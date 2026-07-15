@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Embedded Wallet Protection — Wallet Nation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #ffffff;
+      --surface: #fafaf8;
+      --fg:      #171717;
+      --muted:   #6B7280;
+      --border:  #E5E7EB;
+      --accent:  #C9FA49;
+      --deep:    #4B5A34;
+      --tint:    #EAF7C9;
+      --shadow:  0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+      --font-display: 'Poppins', sans-serif;
+      --font-body:    'Poppins', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+
+    .eyebrow {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #5A7A3A;
+      margin-bottom: 12px;
+    }
+
+    .hero-card {
+      background: var(--tint);
+      border-radius: 20px;
+      padding: 56px 48px;
+      margin-top: 32px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--fg); }
+    .back-link svg { width: 14px; height: 14px; }
+    .hero-card h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(36px, 4vw, 48px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      max-width: 800px;
+    }
+    .hero-card .sub {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .risk-section {
+      background: var(--surface);
+    }
+    .risk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .risk-stat {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(48px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      margin-bottom: 16px;
+    }
+    .risk-body {
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .callout-card {
+      background: var(--tint);
+      border-radius: 16px;
+      padding: 48px 36px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .callout-card span {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(24px, 3vw, 32px);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      text-transform: uppercase;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .benefit-card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 32px 28px;
+    }
+    .benefit-card h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .benefit-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .cta-section {
+      background: var(--surface);
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(28px, 3vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 14px 32px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 0;
+      background: var(--accent);
+      color: var(--fg);
+    }
+    .btn:hover { background: var(--deep); transform: translateY(-1px); }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+    }
+    footer p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .risk-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .hero-card { padding: 40px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <div class="container">
+      <a href="index.html#solutions" class="back-link">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l-4 4 4 4"/></svg>
+        Back to solutions
+      </a>
+      <div class="hero-card">
+        <div class="eyebrow">Embedded Wallet Protection</div>
+        <h1>Add trusted payment protection to your existing wallet.</h1>
+        <p class="sub">Wallet Nation enables wallet providers to embed non-custodial payment protection directly into existing wallet experiences, without rebuilding the payment stack or disrupting user flows.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="risk-section">
+    <div class="container">
+      <div class="risk-grid">
+        <div>
+          <div class="eyebrow">The risk</div>
+          <div class="risk-stat">No custody required</div>
+          <p class="risk-body">Wallets give users control, but not protection. Wallet Nation closes that gap by embedding conditional settlement directly into the wallet experience — without introducing custody.</p>
+        </div>
+        <div class="callout-card">
+          <span>Embedded protection</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="eyebrow" style="font-size:14px;margin-bottom:4px;">Key benefits</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h3>Seamless integration</h3>
+          <p>Protection is embedded into the existing wallet UI and flow — no rebuilding, no re-education for users.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Non-custodial by design</h3>
+          <p>Wallet Nation never takes custody of user funds. Protection is enforced through cryptographic control credentials.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Trusted user experience</h3>
+          <p>Give wallet users confidence in every transaction, without changing how they already use the wallet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to embed protection into your wallet?</h2>
+      <button class="btn">Talk to us</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Wallet Nation. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

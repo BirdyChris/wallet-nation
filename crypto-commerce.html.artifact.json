@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "crypto-commerce.html",
+  "entry": "crypto-commerce.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-07-14T08:07:09.498Z",
+  "updatedAt": "2026-07-14T08:07:09.498Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

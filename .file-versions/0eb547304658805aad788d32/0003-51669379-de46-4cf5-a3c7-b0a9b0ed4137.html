@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wallet Nation — Non-custodial payment protection for digital assets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #ffffff;
+      --surface: #fafaf8;
+      --fg:      #171717;
+      --muted:   #6B7280;
+      --border:  #E5E7EB;
+      --accent:  #D8EECC;
+      --accent2: #c5e0b4;
+      --shadow:  0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+      --font-display: 'Nunito', 'Quicksand', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 96px 0; }
+    section.alt { background: var(--surface); }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 14px 32px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 0;
+    }
+    .btn-primary { background: var(--accent); color: var(--fg); }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--fg);
+      border: 1.5px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--muted); transform: translateY(-1px); }
+
+    /* ---- nav ---- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      height: 68px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo svg { width: 28px; height: 28px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin: 0 auto;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-cta {
+      margin-left: auto;
+      background: var(--accent);
+      color: var(--fg);
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 24px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+      z-index: 101;
+    }
+    .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: 0;
+      margin-left: auto;
+      margin-right: 12px;
+      z-index: 102;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--fg);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ---- hero ---- */
+    .hero {
+      padding: 100px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -8%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,238,204,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(32px, 3.6vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .hero-image {
+      border-radius: 16px;
+      box-shadow: 8px 8px 0 0 rgba(216,238,204,0.3), var(--shadow-lg);
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .stat-card .stat-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-card .stat-label {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .stat-card .stat-label strong {
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    /* ---- cards ---- */
+    .card-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .card-grid-7 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .card h3 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .card .card-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--fg);
+    }
+    .card .card-arrow svg { width: 14px; height: 14px; }
+
+    /* ---- why matters ---- */
+    .pull-quote {
+      background: var(--surface);
+      border-left: 4px solid var(--accent);
+      padding: 24px 28px;
+      margin-top: 36px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      border-radius: 0 8px 8px 0;
+      max-width: 700px;
+    }
+
+    /* ---- steps ---- */
+    .steps-vertical {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .step-v {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-v:last-child { border-bottom: 0; }
+    .step-v-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+    }
+    .step-v h3 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+    .step-v p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* ---- scale ---- */
+    .scale-block {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+    }
+    .scale-block:last-of-type { border-bottom: 1px solid var(--border); }
+    .scale-block h3 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .scale-block p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ---- faq ---- */
+    .faq-list {
+      max-width: 720px;
+      margin-top: 48px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.4;
+      user-select: none;
+    }
+    .faq-q svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      color: var(--muted);
+    }
+    .faq-item.open .faq-q svg { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0;
+    }
+    .faq-a-inner {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+      padding-bottom: 20px;
+    }
+    .faq-item.open .faq-a { max-height: 400px; }
+
+    /* ---- contact form ---- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
+      align-items: start;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-form .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contact-form label {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      font-family: var(--font-body);
+      font-size: 15px;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--fg);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent);
+    }
+    .contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .contact-form .btn { align-self: flex-start; }
+    .contact-note {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ---- footer ---- */
+    footer {
+      padding: 64px 0 32px;
+      border-top: 1px solid var(--border);
+    }
+    footer .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+    }
+    footer .tagline {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-top: 8px;
+      max-width: 300px;
+    }
+    footer h4 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    footer a {
+      font-size: 14px;
+      line-height: 2;
+      color: var(--muted);
+      display: block;
+    }
+    footer a:hover { color: var(--fg); }
+    .footer-bottom {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p { font-size: 12px; color: var(--muted); }
+
+    /* ---- responsive ---- */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: repeat(2, 1fr); }
+      .card-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .card-grid-3 { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .scale-block { grid-template-columns: 1fr; gap: 8px; }
+      #scale .container > div[style*="grid"] { grid-template-columns: 1fr !important; }
+      footer .container { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr; }
+      .card-grid-4 { grid-template-columns: 1fr; }
+      .stat-row .stat-card { padding: 18px; }
+      section { padding: 64px 0; }
+      .hero { padding: 64px 0 48px; }
+      .step-v { grid-template-columns: 1fr; gap: 8px; }
+      .step-v-num { font-size: 24px; }
+      footer .container { grid-template-columns: 1fr; }
+      .hero h1 { font-size: clamp(26px, 6vw, 36px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav data-od-id="nav">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="assets/WN_Logo-BW.png" alt="Wallet Nation" height="28" />
+        Wallet Nation
+      </a>
+      <div class="nav-links">
+        <a href="#why-matters">Why</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="nav-cta" data-od-id="nav-cta">Talk to us</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#why-matters">Why</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#solutions">Solutions</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <button class="btn btn-primary" style="margin-top:16px;">Talk to us</button>
+  </div>
+
+  <!-- 1. Hero -->
+  <section class="hero" data-od-id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <h1>Wallet Nation enables payment platforms and merchants to introduce non-custodial payment protection for stablecoin transactions without changing existing payment infrastructure.</h1>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-od-id="hero-cta">Talk to us</button>
+            <button class="btn btn-secondary" data-od-id="hero-how">How it works</button>
+          </div>
+        </div>
+        <div>
+          <img src="assets/WN-hero-image---BW.png" alt="Wallet Nation protection dashboard" class="hero-image" />
+        </div>
+      </div>
+      <div class="stat-row" data-od-id="hero-stats">
+        <div class="stat-card" data-od-id="stat-markets">
+          <div class="stat-num">7 markets</div>
+          <div class="stat-label">Protected across every use case</div>
+        </div>
+        <div class="stat-card" data-od-id="stat-noncustodial">
+          <div class="stat-num">100%</div>
+          <div class="stat-label"><strong>Non-custodial</strong> — never hold funds</div>
+        </div>
+        <div class="stat-card" data-od-id="stat-chain">
+          <div class="stat-num">Chain-agnostic</div>
+          <div class="stat-label">USDC, USDT, AUDD, AUDM &amp; more</div>
+        </div>
+        <div class="stat-card" data-od-id="stat-disruption">
+          <div class="stat-num">Zero-disruption</div>
+          <div class="stat-label">Drop into existing payment rails</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Why It Matters -->
+  <section class="alt" id="why-matters" data-od-id="why-matters">
+    <div class="container">
+      <div class="section-label">Why it matters</div>
+      <h2 class="section-title">Digital asset payments are irreversible by design. Protection should not require a custodian.</h2>
+      <p class="section-sub">On-chain settlement has no chargeback or reversal mechanism. Once a transaction confirms, it is final — errors, disputes, and fraud cannot be undone. Wallet Nation closes that gap with a non-custodial conditional-release layer that protects both parties before settlement becomes final.</p>
+      <div class="pull-quote">"Wallets give control. They don't give protection. — Wallet Nation solves trust."</div>
+    </div>
+  </section>
+
+  <!-- 3. Why Wallet Nation -->
+  <section id="why-wn" data-od-id="why-wn">
+    <div class="container">
+      <div class="section-label">Why Wallet Nation</div>
+      <h2 class="section-title">Built for digital asset payments that need protection without compromise.</h2>
+      <p class="section-sub">Four pillars that make Wallet Nation the non-custodial protection layer for digital assets.</p>
+      <div class="card-grid-4">
+        <div class="card" data-od-id="pillar-noncustodial">
+          <h3>Non-custodial</h3>
+          <p>Protection enforced on-chain through cryptographic control credentials — never through custodial accounts or third-party escrow.</p>
+        </div>
+        <div class="card" data-od-id="pillar-chainagnostic">
+          <h3>Chain-agnostic</h3>
+          <p>Works across major digital asset networks. Designed for USDC, USDT, and major stablecoins on any blockchain.</p>
+        </div>
+        <div class="card" data-od-id="pillar-zerodisruption">
+          <h3>Zero disruption</h3>
+          <p>Integrates alongside existing payment rails and wallets — no migration, no new custody, no changes to your core stack.</p>
+        </div>
+        <div class="card" data-od-id="pillar-conditions">
+          <h3>Conditional settlement</h3>
+          <p>Payment release stays conditional until agreed commercial conditions are confirmed by both parties or a trusted third party.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. How It Works -->
+  <section class="alt" id="how-it-works" data-od-id="how-it-works">
+    <div class="container">
+      <div class="section-label">How it works</div>
+      <h2 class="section-title">How protected payments work.</h2>
+      <p class="section-sub">Wallet Nation uses Transfer Wallet&trade; technology to protect digital asset payments by conditionally transferring control — not custody of funds.</p>
+      <div class="steps-vertical">
+        <div class="step-v" data-od-id="step-1">
+          <div class="step-v-num">01</div>
+          <div>
+            <h3>Transfer Wallet created</h3>
+            <p>A Transfer Wallet is created for the transaction. Cryptographic control credentials are generated. No funds are deposited yet.</p>
+          </div>
+        </div>
+        <div class="step-v" data-od-id="step-2">
+          <div class="step-v-num">02</div>
+          <div>
+            <h3>Parties receive encrypted control credentials</h3>
+            <p>Both transacting parties receive their encrypted credentials. Control is shared — no single party can act alone, and Wallet Nation holds no custody.</p>
+          </div>
+        </div>
+        <div class="step-v" data-od-id="step-3">
+          <div class="step-v-num">03</div>
+          <div>
+            <h3>Funds deposited</h3>
+            <p>The sender deposits funds into the Transfer Wallet. They remain under the cryptographic control of both parties — not Wallet Nation.</p>
+          </div>
+        </div>
+        <div class="step-v" data-od-id="step-4">
+          <div class="step-v-num">04</div>
+          <div>
+            <h3>Conditions satisfied → control released</h3>
+            <p>When agreed conditions are met — delivery confirmed, milestone reached, window expired — control is released and settlement completes on-chain.</p>
+          </div>
+        </div>
+        <div class="step-v" data-od-id="step-5">
+          <div class="step-v-num">05</div>
+          <div>
+            <h3>Dispute raised → arbitrator resolves</h3>
+            <p>If a dispute arises, an arbitrator reviews evidence and co-signs a resolution. The arbitrator cannot unilaterally move funds — rules are encoded, not discretionary.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Solutions -->
+  <section id="solutions" data-od-id="solutions">
+    <div class="container">
+      <div class="section-label">Solutions</div>
+      <h2 class="section-title">Protection across every use case.</h2>
+      <p class="section-sub">Wallet Nation serves seven markets.</p>
+      <div class="card-grid-7">
+        <div class="card" data-od-id="solution-crypto-commerce">
+          <img src="assets/WN_Icon_PPS---BW.png" alt="" width="40" height="40" style="margin-bottom:12px;" />
+          <h3>Crypto Commerce</h3>
+          <p>Protect stablecoin payment rails before settlement becomes final. Merchants and customers complete purchases with greater confidence.</p>
+          <span class="card-arrow">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card" data-od-id="solution-stablecoin">
+          <img src="assets/WN_Icon_GIFT---BW.png" alt="" width="40" height="40" style="margin-bottom:12px;" />
+          <h3>Stablecoin Merchant Payments</h3>
+          <p>Drop into existing stablecoin payment rails. No wallet migration, no new custody arrangements, no changes to your core stack.</p>
+          <span class="card-arrow">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card" data-od-id="solution-exchange">
+          <img src="assets/WN_Icon_SECURE---BW.png" alt="" width="40" height="40" style="margin-bottom:12px;" />
+          <h3>Exchange Funding &amp; Withdrawals</h3>
+          <p>Reduce funding and withdrawal risk before finality. Introduce a conditional window between instruction and finality.</p>
+          <span class="card-arrow">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card" data-od-id="solution-embedded">
+          <img src="assets/WN_Icon_GOM---BW.png" alt="" width="40" height="40" style="margin-bottom:12px;" />
+          <h3>Embedded Wallet Protection</h3>
+          <p>Add trusted payment protection to existing wallet experiences without rebuilding your payment stack or disrupting user flows.</p>
+          <span class="card-arrow">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card" data-od-id="solution-otc">
+          <img src="assets/WN_Icon_Blue_CHALL---BW.png" alt="" width="40" height="40" style="margin-bottom:12px;" />
+          <h3>High-Value OTC Transfers</h3>
+          <p>Reduce settlement risk for institutional transfers. Both counterparties protected in the same settlement window.</p>
+          <span class="card-arrow">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card" data-od-id="solution-b2b">
+          <img src="assets/WN_Icon_Blue_LEARN---BW.png" alt="" width="40" height="40" style="margin-bottom:12px;" />
+          <h3>B2B Digital Asset Settlement</h3>
+          <p>Bring conditional settlement to enterprise digital asset payments with approval workflows — without changing existing processes.</p>
+          <span class="card-arrow">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card" data-od-id="solution-web3">
+          <img src="assets/WN_Icon_NFT---BW.png" alt="" width="40" height="40" style="margin-bottom:12px;" />
+          <h3>Web3 Marketplace Transactions</h3>
+          <p>Protect marketplace transactions before ownership changes. Asset and payment linked — neither party completes without the other performing.</p>
+          <span class="card-arrow">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Scale -->
+  <section class="alt" id="scale" data-od-id="scale">
+    <div class="container">
+      <div class="section-label">Scale</div>
+      <h2 class="section-title">Built for the future of digital payments.</h2>
+      <p class="section-sub" style="max-width:620px;">Wallet Nation aligns with existing payment infrastructure rather than replacing it. The business process stays the same; the settlement layer improves.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:48px;">
+        <div>
+          <img src="assets/footer-image.png" alt="Wallet Nation ecosystem" style="border-radius:16px;box-shadow:8px 8px 0 0 rgba(216,238,204,0.3),var(--shadow-lg);width:100%;" />
+        </div>
+        <div>
+        <div class="scale-block" data-od-id="scale-noncustodial">
+          <h3>Non-custodial by design</h3>
+          <p>The protection layer operates on-chain, preserving self-custody principles. No third-party custody, no escrow agent, no additional counterparty risk.</p>
+        </div>
+        <div class="scale-block" data-od-id="scale-integration">
+          <h3>Drop-in integration</h3>
+          <p>Works alongside existing payment infrastructure — no new rails, no new wallets, no customer re-education. Protection scales with every transaction.</p>
+        </div>
+        <div class="scale-block" data-od-id="scale-transferwallet">
+          <h3>Transfer Wallet&trade; technology</h3>
+          <p>Conditionally transfers control — not custody of funds. Protection is enforced through cryptographic credentials.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section id="faq" data-od-id="faq">
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Frequently asked questions.</h2>
+      <div class="faq-list" data-od-id="faq-list">
+        <div class="faq-item" data-od-id="faq-1">
+          <div class="faq-q">What is Wallet Nation? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">Wallet Nation is a non-custodial transaction protection platform that introduces conditional settlement for digital asset payments. Rather than holding customer funds, Wallet Nation protects the transaction by controlling the Transfer Wallet™ until agreed conditions have been satisfied.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-2">
+          <div class="faq-q">How is Wallet Nation different from traditional escrow? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">Traditional escrow providers hold customer funds until a transaction is completed. Wallet Nation does not hold customer funds. Instead, it conditionally controls the Transfer Wallet, allowing the transacting parties to remain in control while introducing protection before settlement becomes final.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-3">
+          <div class="faq-q">Does Wallet Nation take custody of digital assets? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">No. Wallet Nation is designed as a non-custodial platform. Customer assets remain under the control of the transacting parties throughout the transaction. Wallet Nation never operates as a custodian of customer funds.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-4">
+          <div class="faq-q">What is Transfer Wallet™? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">Transfer Wallet™ is Wallet Nation's patent-pending transaction mechanism. It enables digital asset transactions to be protected through conditional release rather than irreversible settlement, allowing agreed conditions to be met before control is transferred.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-5">
+          <div class="faq-q">How does Wallet Nation resolve disputes? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">If a dispute arises before settlement conditions have been satisfied, the Transfer Wallet remains protected while the parties seek resolution. Where required, an agreed independent arbitrator can review the evidence and assist in resolving the dispute.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-6">
+          <div class="faq-q">Does Wallet Nation reverse blockchain transactions? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">No. Wallet Nation does not reverse blockchain transactions. Instead, it introduces protection before settlement becomes final, reducing the need for reversals by preventing disputes before they occur.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-7">
+          <div class="faq-q">Which digital assets are supported? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">Wallet Nation is designed to be blockchain and asset agnostic. The architecture can support stablecoins, cryptocurrencies and other tokenised digital assets, depending on implementation by partners.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-8">
+          <div class="faq-q">Who is Wallet Nation designed for? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">Wallet Nation is designed for organisations that facilitate digital asset transactions, including: Payment platforms, Stablecoin providers, Crypto exchanges, Wallet providers, Enterprise payment platforms, Web3 marketplaces, OTC trading platforms.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-9">
+          <div class="faq-q">Does Wallet Nation replace existing wallets or payment platforms? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">No. Wallet Nation is designed to integrate alongside existing wallets, exchanges and payment infrastructure, adding an additional protection layer without requiring organisations to replace their current systems.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-10">
+          <div class="faq-q">Why is non-custodial architecture important? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">Keeping customers in control of their own assets reduces custodial complexity, improves security and preserves the self-sovereign principles of blockchain while still introducing trusted transaction protection. This aligns with the core architectural principles described in the Wallet Nation whitepaper.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-11">
+          <div class="faq-q">Is Wallet Nation a consumer wallet? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">No. Wallet Nation is infrastructure. It is licensed to payment providers, exchanges, wallet platforms and enterprises that want to introduce protected digital asset settlement into their existing products.</div></div>
+        </div>
+        <div class="faq-item" data-od-id="faq-12">
+          <div class="faq-q">How do I learn more? <svg viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="faq-a"><div class="faq-a-inner">If you're exploring protected digital asset payments, licensing opportunities or potential partnerships, contact the Wallet Nation team to discuss your specific use case.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Contact -->
+  <section class="alt" id="contact" data-od-id="contact">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">How can we help protect your payment flows?</h2>
+      <p class="section-sub">Tell us about your payment environment. Our team will get back to you with a tailored overview of how Wallet Nation fits your infrastructure.</p>
+      <div class="contact-grid">
+        <form class="contact-form" data-od-id="contact-form">
+          <div class="field">
+            <label for="c-name">Name</label>
+            <input type="text" id="c-name" name="name" placeholder="Your name" />
+          </div>
+          <div class="field">
+            <label for="c-company">Company</label>
+            <input type="text" id="c-company" name="company" placeholder="Company name" />
+          </div>
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" name="email" placeholder="you@company.com" />
+          </div>
+          <div class="field">
+            <label for="c-message">Message</label>
+            <textarea id="c-message" name="message" placeholder="Tell us about your payment environment..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send message</button>
+        </form>
+        <div class="contact-note">
+          <p>Our team reviews every inquiry and responds within one business day. We work with payment platforms, exchanges, wallet providers, and enterprises exploring protected digital asset settlement.</p>
+          <p style="margin-top:16px;">No sales pitch — just a tailored overview of how Wallet Nation fits your specific payment infrastructure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Footer -->
+  <footer data-od-id="footer">
+    <div class="container">
+      <div>
+        <div class="nav-logo" style="margin-bottom:8px;">
+          <img src="assets/WN_Logo-BW.png" alt="Wallet Nation" height="22" />
+          Wallet Nation
+        </div>
+        <p class="tagline">The non-custodial protection layer for digital asset payments.</p>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <a href="#">Crypto Commerce</a>
+        <a href="#">Stablecoin Payments</a>
+        <a href="#">Exchange Funding</a>
+        <a href="#">Embedded Wallets</a>
+        <a href="#">OTC Transfers</a>
+        <a href="#">B2B Settlement</a>
+        <a href="#">Web3 Marketplaces</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Technology</h4>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#">Transfer Wallet&trade;</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Wallet Nation. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      // Hamburger
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (hamburger) {
+        hamburger.addEventListener('click', function() {
+          hamburger.classList.toggle('open');
+          mobileMenu.classList.toggle('open');
+        });
+      }
+
+      // FAQ accordion
+      document.querySelectorAll('.faq-q').forEach(function(q) {
+        q.addEventListener('click', function() {
+          var item = q.parentElement;
+          var isOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item.open').forEach(function(o) {
+            o.classList.remove('open');
+          });
+          if (!isOpen) item.classList.add('open');
+        });
+      });
+
+      // Close mobile menu on link click
+      mobileMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+        });
+      });
+
+      // Form submit
+      document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Placeholder — would POST to backend
+        var btn = this.querySelector('.btn');
+        btn.textContent = 'Message sent';
+        btn.style.pointerEvents = 'none';
+        btn.style.opacity = '0.7';
+      });
+    })();
+  </script>
+</body>
+</html>

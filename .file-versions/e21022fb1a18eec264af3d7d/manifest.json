@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "fileName": "crypto-commerce.html",
+  "entries": [
+    {
+      "id": "73468df2-06a1-447a-9e95-13373797b685",
+      "fileName": "crypto-commerce.html",
+      "version": 1,
+      "label": "Version 1",
+      "createdAt": 1784016441701,
+      "source": "ai",
+      "prompt": "Build a solution detail page template for Wallet Nation using the established design system (white background, Poppins typography, bright lime #C9FA49 / deep olive #4B5A34 / pale tint #EAF7C9 green palette, #171717 primary text, #6B7280 secondary text, #E5E7EB borders).\n\nStructure:\n- Sticky nav (Home, Solutions, FAQ, \"Get protected\" bright-lime pill button), with a \"← Back to solutions\" link beneath it.\n- Uppercase eyebrow label (solution name, deep olive or bright lime).\n- Large Poppins headline (weight 600) + one-sentence sub-copy (Poppins weight 400, #6B7280).\n- A \"THE RISK\" section: a bold stat or short phrase as the visual focal point, styled on a pale-lime-tint (#EAF7C9) card, paired with a small uppercase category label and a short risk paragraph beneath.\n- A \"Key benefits\" section: three cards (white background, #E5E7EB border, soft shadow), each with a title (bold, near-black) and description (muted gray).\n- Closing CTA band: \"Ready to protect your [solution]?\" headline with a \"Talk to us\" bright-lime pill button.\n- Shared footer matching the homepage (tagline, link columns, social icons, copyright).\n\nGenerate this page first using the following content for Crypto Commerce:\nHeadline: \"Protect stablecoin payments before settlement becomes final.\"\nSub: \"Wallet Nation enables payment platforms and merchants to introduce non-custodial payment protection for stablecoin transactions without changing existing payment infrastructure.\"\nRisk stat: \"< 60 seconds\" — label \"SETTLEMENT FINALITY\" — \"Once a stablecoin payment is confirmed on-chain, settlement is generally irreversible. Wallet Nation introduces protection before finality without taking custody.\"\nBenefits: Conditional payment (\"Customers can commit funds knowing payment is conditional on delivery — eliminating the leap of faith that crypto commerce currently requires.\"); Merchant protection (\"Merchants know payment is secured before fulfilling an order, reducing exposure to non-delivery disputes and fraud.\"); Zero integration (\"Wallet Nation works alongside existing crypto payment infrastructure — no new rails, no new wallets, no customer re-education.\")\nCTA: \"Ready to protect your crypto commerce?\"",
+      "size": 13542,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0001-73468df2-06a1-447a-9e95-13373797b685.html",
+      "promptSource": "message"
+    },
+    {
+      "id": "d0a0a8f1-6ed0-4937-be3a-f828d42f4ab9",
+      "fileName": "crypto-commerce.html",
+      "version": 2,
+      "label": "Version 2",
+      "createdAt": 1784077400259,
+      "source": "ai",
+      "prompt": "Recreate the \"Crypto Commerce\" solutions template page using this exact layout structure:\n1. Hero card (rounded, soft accent-tinted background): back link \"← Back to solutions\", small uppercase eyebrow label \"CRYPTO COMMERCE\", large bold H1 headline, one-paragraph subtext below.\n2. \"The Risk\" section (two columns on a light grey background): left column has small uppercase label \"THE RISK\", a large bold stat/headline, and a short paragraph; right column has a rounded accent-tinted callout card with a short bold centered uppercase phrase.\n3. \"Key benefits\" section (white background): H2 \"Key benefits\", followed by a grid of rounded light-grey cards (2 per row, wrapping to a 3rd row if needed), each with a bold title and short description.\n4. Closing CTA section (light grey background): centered H2 question, with a solid accent-colored rounded button below it.\n5. Footer: simple centered copyright line.\n\nContent to use:\n- Eyebrow label: CRYPTO COMMERCE\n- H1: Protect stablecoin payments before settlement becomes final.\n- Subtext: Wallet Nation enables payment platforms and merchants to introduce non-custodial payment protection for stablecoin transactions without changing existing payment infrastructure.\n- Risk label: THE RISK\n- Risk stat: < 60 seconds\n- Risk paragraph: Once a stablecoin payment is confirmed on-chain, settlement is generally irreversible. Wallet Nation introduces protection before finality without taking custody.\n- Callout box text: SETTLEMENT FINALITY\n- Key benefit 1 — Conditional payment: Customers can commit funds knowing payment is conditional on delivery — eliminating the leap of faith that crypto commerce currently requires.\n- Key benefit 2 — Merchant protection: Merchants know payment is secured before fulfilling an order, reducing exposure to non-delivery disputes and fraud.\n- Key benefit 3 — Zero integration: Wallet Nation works alongside existing crypto payment infrastructure — no new rails, no new wallets, no customer re-education.\n- CTA headline: Ready to protect your crypto commerce?\n- Button text: Talk to us",
+      "size": 7428,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0002-d0a0a8f1-6ed0-4937-be3a-f828d42f4ab9.html",
+      "promptSource": "message"
+    },
+    {
+      "id": "40623948-d938-4a99-bad6-8b7d4d8fb7cd",
+      "fileName": "crypto-commerce.html",
+      "version": 3,
+      "label": "Version 3",
+      "createdAt": 1784078841342,
+      "source": "ai",
+      "prompt": "The Headings for each section in the hero page & the Solutions pages need to be a bigger & a more striking green",
+      "size": 7432,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0003-40623948-d938-4a99-bad6-8b7d4d8fb7cd.html",
+      "promptSource": "message"
+    },
+    {
+      "id": "02bbac02-a9da-449a-b20d-b9e9844c3260",
+      "fileName": "crypto-commerce.html",
+      "version": 4,
+      "label": "Version 4",
+      "createdAt": 1784081390231,
+      "source": "ai",
+      "prompt": "I thought you did a complete & thorough run through??",
+      "size": 7448,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0004-02bbac02-a9da-449a-b20d-b9e9844c3260.html",
+      "promptSource": "message"
+    },
+    {
+      "id": "56d5f21c-836b-4ac6-9b64-c20d65f4ccc3",
+      "fileName": "crypto-commerce.html",
+      "version": 5,
+      "label": "Version 5",
+      "createdAt": 1784081670102,
+      "source": "ai",
+      "prompt": "the footer solutions do not take you to their pages",
+      "size": 7002,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0005-56d5f21c-836b-4ac6-9b64-c20d65f4ccc3.html",
+      "promptSource": "message"
+    }
+  ]
+}

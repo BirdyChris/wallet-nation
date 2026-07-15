@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "fileName": "exchange-funding.html",
+  "entries": [
+    {
+      "id": "f30e4a97-ff53-48d4-a48d-c15e02a68a68",
+      "fileName": "exchange-funding.html",
+      "version": 1,
+      "label": "Version 1",
+      "createdAt": 1784078187164,
+      "source": "ai",
+      "prompt": "Recreate the same solutions template page layout used for \"Crypto Commerce\":\n1. Hero card (rounded, soft accent-tinted background): back link \"← Back to solutions\", small uppercase eyebrow label, large bold H1 headline, one-paragraph subtext.\n2. \"The Risk\" section (two columns, light grey background): left has label \"THE RISK\", a large bold stat, and a short paragraph; right has a rounded accent-tinted callout card with a short bold centered uppercase phrase.\n3. \"Key benefits\" section (white background): H2 \"Key benefits\", grid of rounded light-grey cards (2 per row), each with a bold title and short description.\n4. Closing CTA section (light grey background): centered H2 question with a solid accent-colored button beneath.\n5. Footer: centered copyright line.\n\nContent to use:\n- Eyebrow label: EXCHANGE FUNDING & WITHDRAWALS\n- H1: Reduce funding and withdrawal risk before finality.\n- Subtext: Wallet Nation enables exchanges to introduce a conditional window between instruction and finality, reducing exposure to funding and withdrawal risk without taking custody of customer assets.\n- Risk label: THE RISK\n- Risk stat: Instruction → Finality\n- Risk paragraph: Once a funding or withdrawal instruction settles on-chain, there is no reversal. Wallet Nation introduces a conditional window before finality, giving exchanges a chance to verify and protect the transaction.\n- Callout box text: CONDITIONAL WINDOW\n- Key benefit 1 — Reduced withdrawal risk: Introduce a verification window between instruction and finality, reducing exposure to fraudulent or erroneous withdrawals.\n- Key benefit 2 — Funding protection: Protect incoming funding transactions before they settle, without adding custodial risk to the exchange.\n- Key benefit 3 — Zero disruption: Works alongside existing exchange infrastructure — no new custody model, no changes to withdrawal workflows.\n- CTA headline: Ready to protect your funding and withdrawal flows?\n- Button text: Talk to us",
+      "size": 7486,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0001-f30e4a97-ff53-48d4-a48d-c15e02a68a68.html",
+      "promptSource": "message"
+    },
+    {
+      "id": "75133919-c8e3-4a87-9024-eb309f46340f",
+      "fileName": "exchange-funding.html",
+      "version": 2,
+      "label": "Version 2",
+      "createdAt": 1784078841341,
+      "source": "ai",
+      "prompt": "The Headings for each section in the hero page & the Solutions pages need to be a bigger & a more striking green",
+      "size": 7490,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0002-75133919-c8e3-4a87-9024-eb309f46340f.html",
+      "promptSource": "message"
+    },
+    {
+      "id": "259be703-fb9c-436f-85dc-9b4ab16b6e2b",
+      "fileName": "exchange-funding.html",
+      "version": 3,
+      "label": "Version 3",
+      "createdAt": 1784081390231,
+      "source": "ai",
+      "prompt": "I thought you did a complete & thorough run through??",
+      "size": 7506,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0003-259be703-fb9c-436f-85dc-9b4ab16b6e2b.html",
+      "promptSource": "message"
+    },
+    {
+      "id": "a38ff915-4324-47a9-9a65-5b1142217197",
+      "fileName": "exchange-funding.html",
+      "version": 4,
+      "label": "Version 4",
+      "createdAt": 1784081670102,
+      "source": "ai",
+      "prompt": "the footer solutions do not take you to their pages",
+      "size": 7060,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0004-a38ff915-4324-47a9-9a65-5b1142217197.html",
+      "promptSource": "message"
+    }
+  ]
+}

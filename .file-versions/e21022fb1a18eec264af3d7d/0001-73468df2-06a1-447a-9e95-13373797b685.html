@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crypto Commerce — Wallet Nation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #ffffff;
+      --surface: #fafaf8;
+      --fg:      #171717;
+      --muted:   #6B7280;
+      --border:  #E5E7EB;
+      --accent:  #C9FA49;
+      --deep:    #4B5A34;
+      --tint:    #EAF7C9;
+      --shadow:  0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+      --font-display: 'Poppins', sans-serif;
+      --font-body:    'Poppins', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 96px 0; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container { display: flex; align-items: center; height: 68px; }
+    .nav-logo {
+      font-family: var(--font-display); font-weight: 600; font-size: 20px;
+      letter-spacing: -0.02em; color: var(--fg);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo img { height: 28px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 32px; margin: 0 auto; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-cta {
+      margin-left: auto; background: var(--accent); color: var(--fg); border: 0;
+      border-radius: 999px; padding: 10px 24px; font-family: var(--font-body);
+      font-weight: 600; font-size: 14px; cursor: pointer;
+      transition: background 0.2s, transform 0.15s; white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--deep); transform: translateY(-1px); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border-radius: 999px; padding: 14px 32px; font-family: var(--font-body);
+      font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; border: 0;
+    }
+    .btn-primary { background: var(--accent); color: var(--fg); }
+    .btn-primary:hover { background: var(--deep); transform: translateY(-1px); }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; color: var(--muted); margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--fg); }
+    .back-link svg { width: 14px; height: 14px; }
+
+    .section-label {
+      font-family: var(--font-display); font-weight: 600; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.5px; color: #5A7A3A; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(36px, 4vw, 48px); line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-weight: 400; font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 680px;
+    }
+
+    .hero-solution {
+      padding: 48px 0 0;
+    }
+    .hero-solution h1 {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(36px, 4vw, 48px); line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .hero-solution .sub {
+      font-weight: 400; font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 680px;
+    }
+
+    .risk-section {
+      background: var(--tint);
+      border-radius: 16px;
+      padding: 48px;
+      margin-top: 48px;
+    }
+    .risk-section .risk-stat {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(48px, 5vw, 64px); line-height: 1;
+      letter-spacing: -0.03em; color: var(--fg); margin-bottom: 4px;
+    }
+    .risk-section .risk-label {
+      font-family: var(--font-display); font-weight: 600; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.5px; color: #5A7A3A; margin-bottom: 16px;
+    }
+    .risk-section .risk-body {
+      font-weight: 400; font-size: 15px; line-height: 1.7; color: var(--muted); max-width: 600px;
+    }
+
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+    }
+    .benefit-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 32px 24px; box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .benefit-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .benefit-card h3 {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: 17px; letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .benefit-card p { font-size: 14px; line-height: 1.6; color: var(--muted); }
+
+    .cta-section { text-align: center; }
+    .cta-section .section-title { max-width: 600px; margin: 0 auto 16px; }
+    .cta-section .section-sub { margin: 0 auto 32px; }
+
+    footer {
+      padding: 64px 0 32px; border-top: 1px solid var(--border);
+    }
+    footer .container { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+    footer .tagline {
+      font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 8px; max-width: 300px;
+    }
+    footer h4 { font-family: var(--font-display); font-weight: 600; font-size: 14px; margin-bottom: 16px; }
+    footer a { font-size: 14px; line-height: 2; color: var(--muted); display: block; }
+    footer a:hover { color: var(--fg); }
+    .footer-social { display: flex; gap: 10px; margin-top: 16px; }
+    .social-btn {
+      width: 40px; height: 40px; border-radius: 8px; background: var(--accent);
+      display: grid; place-items: center; transition: background 0.2s, transform 0.15s;
+    }
+    .social-btn:hover { background: var(--deep); transform: translateY(-2px); }
+    .social-btn svg { width: 20px; height: 20px; color: #171717; }
+    .social-btn:hover svg { color: #fff; }
+    .footer-bottom {
+      grid-column: 1 / -1; border-top: 1px solid var(--border);
+      padding-top: 24px; margin-top: 32px; display: flex;
+      justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 12px; color: var(--muted); }
+
+    .back-to-top {
+      position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px;
+      border-radius: 50%; background: var(--fg); color: #fff; border: 0;
+      cursor: pointer; display: grid; place-items: center;
+      box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s; z-index: 999;
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover { background: var(--deep); }
+    .back-to-top svg { width: 20px; height: 20px; }
+
+    @media (max-width: 900px) {
+      .benefits-grid { grid-template-columns: 1fr; }
+      .risk-section { padding: 32px 24px; }
+      footer .container { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      section { padding: 64px 0; }
+      footer .container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/WN_Logo-BW.png" alt="Wallet Nation" />
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#solutions">Solutions</a>
+        <a href="index.html#faq">FAQ</a>
+      </div>
+      <button class="nav-cta">Get protected</button>
+    </div>
+  </nav>
+
+  <section class="hero-solution">
+    <div class="container">
+      <a href="index.html#solutions" class="back-link">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l-4 4 4 4"/></svg>
+        Back to solutions
+      </a>
+      <div class="section-label">Crypto Commerce</div>
+      <h1>Protect stablecoin payments before settlement becomes final.</h1>
+      <p class="sub">Wallet Nation enables payment platforms and merchants to introduce non-custodial payment protection for stablecoin transactions without changing existing payment infrastructure.</p>
+
+      <div class="risk-section">
+        <div class="risk-stat">&lt; 60 seconds</div>
+        <div class="risk-label">Settlement finality</div>
+        <p class="risk-body">Once a stablecoin payment is confirmed on-chain, settlement is generally irreversible. Wallet Nation introduces protection before finality without taking custody.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">Key benefits</div>
+      <h2 class="section-title">Why Wallet Nation for crypto commerce</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h3>Conditional payment</h3>
+          <p>Customers can commit funds knowing payment is conditional on delivery — eliminating the leap of faith that crypto commerce currently requires.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Merchant protection</h3>
+          <p>Merchants know payment is secured before fulfilling an order, reducing exposure to non-delivery disputes and fraud.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Zero integration</h3>
+          <p>Wallet Nation works alongside existing crypto payment infrastructure — no new rails, no new wallets, no customer re-education.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" style="background:var(--tint);">
+    <div class="container">
+      <div class="section-label">Next step</div>
+      <h2 class="section-title">Ready to protect your crypto commerce?</h2>
+      <button class="btn btn-primary">Talk to us</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div>
+        <div class="nav-logo" style="margin-bottom:8px;">
+          <img src="assets/WN_Logo-BW.png" alt="Wallet Nation" height="22" />
+        </div>
+        <p class="tagline">The non-custodial protection layer for digital asset payments.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="X" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="Medium" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42c1.87 0 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <a href="index.html#solutions">Crypto Commerce</a>
+        <a href="index.html#solutions">Stablecoin Payments</a>
+        <a href="index.html#solutions">Exchange Funding</a>
+        <a href="index.html#solutions">Embedded Wallets</a>
+        <a href="index.html#solutions">OTC Transfers</a>
+        <a href="index.html#solutions">B2B Settlement</a>
+        <a href="index.html#solutions">Web3 Marketplaces</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Technology</h4>
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="#">Transfer Wallet&trade;</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Wallet Nation. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m5 15 7-7 7 7"/></svg>
+  </button>
+
+  <script>
+    (function() {
+      var backBtn = document.getElementById('backToTop');
+      if (backBtn) {
+        window.addEventListener('scroll', function() {
+          backBtn.classList.toggle('visible', window.scrollY > 400);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
